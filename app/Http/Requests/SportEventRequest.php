@@ -26,7 +26,11 @@ class SportEventRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required|min:3|max:255',
+            'start_date' => 'required|date|after:tomorrow',
+            'duration_in_days' => 'required|numeric|min:1|max:25',
+            'sport_id' => 'required',
+            'organizer_id' => 'required',
         ];
     }
 
