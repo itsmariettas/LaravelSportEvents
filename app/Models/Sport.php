@@ -34,6 +34,10 @@ class Sport extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function sport_event()
+    {
+        return $this->hasMany(SportEvent::class);
+    }
 
     /*
     |--------------------------------------------------------------------------

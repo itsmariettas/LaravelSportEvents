@@ -17,7 +17,7 @@ class CreateSportEventsTable extends Migration
             $table->id();
             $table->string('name');
             $table->date('start_date');
-            $table->string('duration_in_days');
+            $table->integer('duration_in_days');
             $table->unsignedBigInteger('sport_id');
             $table->unsignedBigInteger('organizer_id');
             $table->timestamps();

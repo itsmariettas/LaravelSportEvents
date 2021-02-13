@@ -28,6 +28,10 @@ class Organizer extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function sport_event()
+    {
+        return $this->hasMany(SportEvent::class);
+    }
 
     /*
     |--------------------------------------------------------------------------

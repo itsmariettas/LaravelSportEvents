@@ -29,6 +29,8 @@ class SportEventCrudController extends CrudController
         CRUD::setModel(\App\Models\SportEvent::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/sport_event');
         CRUD::setEntityNameStrings('sport_event', 'sport_events');
+
+        $this->crud->addFields($this->getFieldsData());
     }
 
     /**
@@ -39,7 +41,10 @@ class SportEventCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // columns
+        //CRUD::setFromDb(); // columns
+
+        $this->crud->set('show.setFromDb', false);
+        $this->crud->addColumns($this->getFieldsData(TRUE));
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -58,7 +63,10 @@ class SportEventCrudController extends CrudController
     {
         CRUD::setValidation(SportEventRequest::class);
 
-        CRUD::setFromDb(); // fields
+        // CRUD::setFromDb(); // fields
+
+        $this->crud->set('show.setFromDb', false);
+        $this->crud->addFields($this->getFieldsData(TRUE));
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -76,5 +84,51 @@ class SportEventCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    private function getFieldsData($show = FALSE)
+    {
+        return [
+            [
+                'name' => 'name',
+                'label' => 'Name',
+                'type' => 'text'
+            ],
+            [
+                'name' => 'start_date',
+                'label' => 'Start date',
+                'type' => 'date',
+            ],
+            [
+                'name' => 'duration_in_days',
+                'label' => 'Duration in days',
+                'type' => 'number'
+            ],
+            [
+                'label' => "Sport",
+                'name' => 'sport_id',
+                'type' => 'select',
+                'entity' => 'sport',
+                'model'     => "App\Models\Sport",
+                'attribute' => 'type', // foreign key attribute that is shown to user
+            ],
+            [
+                'label' => "Organizer",
+                'name' => 'organizer_id',
+                'type' => 'select',
+                'entity' => 'organizer',
+                'model' => "App\Models\Organizer",
+                'attribute' => 'name', // foreign key attribute that is shown to user
+            ],
+            [
+                'label'        => "Sport Event Image",
+                'name'         => "image",
+                'filename'     => NULL, // set to null if not needed
+                'type'         => 'image',
+                'aspect_ratio' => 1, // set to 0 to allow any aspect ratio
+                'crop'         => true, // set to true to allow cropping, false to disable
+                'src'          => NULL, // null to read straight from DB, otherwise set to model accessor function
+            ]
+        ];
     }
 }
