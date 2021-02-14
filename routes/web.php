@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SportEventController;
+use App\Http\Controllers\OrganizerController;
+use App\Http\Controllers\SportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SportEventController::class, 'index']);
+Route::get('/organizers', [OrganizerController::class, 'index']);
+Route::get('/sports', [SportController::class, 'index']);
