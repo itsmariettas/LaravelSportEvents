@@ -22,16 +22,16 @@
 <p class="display-4 text-center">Sorry, no results were found...</p>
 @else
 <div class="row">
-    @foreach ($sport_events as $sport_events)
+    @foreach ($sport_events as $sport_event)
     <div class="col-4">
         <div class="card bg-dark text-white my-mask" style="min-height: 200px;">
-            <img src="{{$sport_events->image}}" class="card-img" alt="{{$sport_events->image}}">
+            <img src="{{$sport_event->image}}" class="card-img" alt="{{$sport_event->image}}">
             <div class="card-img-overlay" style="z-index: 5;">
-                <h3 class="card-title" style="color: white;">Name: {{$sport_events->name}}</h3>
-                <p class="card-text m-0">Start Date: {{$sport_events->start_date}}</p>
-                <p class="card-text m-0">Duration Days: {{$sport_events->duration_in_days}}</p>
-                <p class="card-text m-0">Organizer Name: {{$organizers->where('id', $sport_events->organizer_id)->first()->name}}</p>
-                <p class="card-text m-0">Sports Type: {{$Sports->where('id', $sport_events->Sport_id)->first()->type}}</p>
+                <h3 class="card-title" style="color: white;">Name: {{$sport_event->name}}</h3>
+                <p class="card-text m-0">Start Date: {{$sport_event->start_date}}</p>
+                <p class="card-text m-0">Duration Days: {{$sport_event->duration_in_days}}</p>
+                <p class="card-text m-0">Organizer Name: {{$organizers->where('id', $sport_event->organizer_id)->first()->name}}</p>
+                <p class="card-text m-0">Sport Type: {{$sports->where('id', $sport_event->sport_id)->first()->type}}</p>
             </div>
         </div>
     </div>
